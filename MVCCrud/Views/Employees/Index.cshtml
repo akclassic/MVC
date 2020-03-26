@@ -1,0 +1,33 @@
+﻿<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+@{
+    ViewBag.Title = "Employee List";
+}
+
+<h2>Employee Index Page</h2>
+<div id="employeegrid">
+
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modalHead">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="bodyMain">
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="saveemployee()">Save changes</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/Employee.js"></script>
