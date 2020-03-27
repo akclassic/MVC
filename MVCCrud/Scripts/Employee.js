@@ -69,8 +69,10 @@ function saveemployee() {
         success: function (response) {
             if (response) {
                 closeModal();
-                alert('Details Updated');
-                displayGrid();
+                setTimeout(() => {
+                    alert('Details Updated');
+                    displayGrid();
+                }, 300)
             }
             
         },
@@ -85,28 +87,32 @@ function saveemployee() {
 
 
 function deleteEmployee(id) {
-    $.ajax({
-        type: "Get",
-        url: '/Employees/DeleteEmployee?id='+id,
-        //data: JSON.stringify(employee),
-        contentType: "application/json; charset=utf-8",
-        dataType: "html",
-        success: function (response) {
-            if (response) {
-                alert('Employee record deleted');
-                displayGrid();
+    let ans = confirm("Are you sure you want to delete this record?");
+    if (ans) {
+        $.ajax({
+            type: "Get",
+            url: '/Employees/DeleteEmployee?id=' + id,
+            //data: JSON.stringify(employee),
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+                if (response) {
+                    
+                    displayGrid();
+                    alert('Employee record deleted');
+                }
+
+                //$('#employeegrid').html(response);
+                //location.reload();
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
             }
-            
-            //$('#employeegrid').html(response);
-            //location.reload();
-        },
-        failure: function (response) {
-            alert(response.responseText);
-        },
-        error: function (response) {
-            alert(response.responseText);
-        }
-    });
+        });
+    }
 }
 //document.onload = displayGrid();
 
