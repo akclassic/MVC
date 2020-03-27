@@ -7,6 +7,7 @@ using MVCCrud.Models;
 
 namespace MVCCrud.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
 
@@ -24,7 +25,15 @@ namespace MVCCrud.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            return View();
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View();
+            }
+           
         }
 
         //Partial View for Employee GRID
@@ -39,7 +48,7 @@ namespace MVCCrud.Controllers
             {
                 Employee employee = new Employee()
                 {
-                    Id = employees.Count+1,
+                    Id = employees[employees.Count-1].Id +1,
                     Name = "",
                     Desgination = "",
                     Salary = 0

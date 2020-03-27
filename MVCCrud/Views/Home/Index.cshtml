@@ -1,8 +1,27 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Landing Page";
 }
+@model MVCCrud.Models.User
 
-<div class="jumbotron">
-   <h2>CRUD APPLICATION LANDING PAGE</h2>
-   @Html.ActionLink("Index","Index","Employees")
-</div>
+    <div class="jumbotron">
+        <h2>CRUD APPLICATION</h2>
+        <div class="container">
+            <h2>Login form</h2>
+                @using (Html.BeginForm("AuthenticateUser", "Home", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        @Html.TextBoxFor(x => x.Username)
+                        @*<input type="tekxt" class="form-control" id="username" placeholder="Enter username" name="username" required>*@
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        @Html.PasswordFor(x => x.Password)
+                        @*<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>*@
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                }
+        </div>
+        @*@Html.ActionLink("Index","Index","Employees")*@
+    </div>
+    <script src="~/Scripts/User.js"></script>

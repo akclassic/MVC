@@ -33,7 +33,7 @@ function loadModal(id) {
         contentType: "application/json; charset=utf-8",
         dataType: "html",
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             $('#bodyMain').html(response);
             $('#modalHead').show();
         },
@@ -69,9 +69,10 @@ function saveemployee() {
         success: function (response) {
             if (response) {
                 closeModal();
+                displayGrid();
                 setTimeout(() => {
+                    
                     alert('Details Updated');
-                    displayGrid();
                 }, 300)
             }
             
@@ -99,7 +100,9 @@ function deleteEmployee(id) {
                 if (response) {
                     
                     displayGrid();
-                    alert('Employee record deleted');
+                    setTimeout(() => {
+                        alert('Employee record deleted');
+                    }, 300)
                 }
 
                 //$('#employeegrid').html(response);
