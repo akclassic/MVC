@@ -42,6 +42,7 @@ namespace MVCCrud.Controllers
             return PartialView(employees);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult EmployeeModal(int id)
         {
             if(id == 0)
@@ -65,6 +66,7 @@ namespace MVCCrud.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public bool UpdateEmployee(Employee employee)
         {
             var newemp = employees.FirstOrDefault(emp => emp.Id == employee.Id);
@@ -91,6 +93,7 @@ namespace MVCCrud.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         public bool DeleteEmployee(int id)
         {
             if(employees.Contains(employees.Where(emp => emp.Id == id).First()))
@@ -102,8 +105,6 @@ namespace MVCCrud.Controllers
             {
                 return false;
             }
-            
-           
         }
     }
 }

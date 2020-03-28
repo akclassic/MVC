@@ -9,8 +9,15 @@ using System.Web.Security;
 namespace MVCCrud.Controllers
 {
     [HandleError]
+    [AllowAnonymous]
     public class HomeController : Controller
     {
+        public static IEnumerable<Role> roles = new List<Role>()
+        {
+            new Role{ Id=1, UserId=1, UserRole="admin"},
+            new Role{ Id=2, UserId=2, UserRole="user"}
+        };
+
         public static IEnumerable<User> users = new List<User>() {
             new User{ Id = 1, Username="Ankit", Password="12345"},
             new User{ Id = 2, Username="Akash", Password="12345"}
@@ -62,6 +69,13 @@ namespace MVCCrud.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index");
         }
     }
 }

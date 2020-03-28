@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<MVCCrud.Models.Employee>
+@if (User.IsInRole("admin"))
+{
     <p>
         <a href="#" onclick="addEmployee(0)">Add Employee</a>
     </p>
+}
 <table class="table">
     <tr>
         <th>
@@ -16,35 +19,42 @@
         <th>
             @Html.DisplayNameFor(model => model.Salary)
         </th>
-        <th>
-            Edit Details
-        </th>
-        <th>
-            Delete Details
-        </th>
+        @if (User.IsInRole("admin"))
+        {
+            <th>
+                Edit Details
+            </th>
+            <th>
+                Delete Details
+            </th>
+        }   
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Id)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Desgination)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Salary)
-    </td>
-    <td>
-        <a href="#" onclick="loadModal(@item.Id)">Edit</a>
-    </td>
-    <td>
-        <a href="#" onclick="deleteEmployee(@item.Id)">Delete</a>
-    </td>
-</tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Desgination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            @if (User.IsInRole("admin"))
+            {
+                <td>
+                    <a href="#" onclick="loadModal(@item.Id)">Edit</a>
+                </td>
+                <td>
+                    <a href="#" onclick="deleteEmployee(@item.Id)">Delete</a>
+                </td>
+            }
+        </tr>
+    }
 
 </table>
